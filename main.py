@@ -47,10 +47,13 @@ def execute_sql(query: str):
         connection = pymysql.connect(**db_config)
         cursor = connection.cursor()
 
+        # Execute the SQL query
         cursor.execute(query)
 
+        # Fetch all the rows
         result = cursor.fetchall()
 
+        # Convert the result to a list of dictionaries
         keys = cursor.description
         column_names = [column[0] for column in keys]
         data = [dict(zip(column_names, row)) for row in result]
